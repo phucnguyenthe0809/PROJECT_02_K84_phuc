@@ -14,3 +14,6 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/hello', function () {
+    echo '<h1>VIETPRO</h1>';
+});
