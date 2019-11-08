@@ -16,27 +16,26 @@
 </head>
 <body>
 	<!-- header -->
-        @include('backend.master.header')
+	@include('backend.master.header')
 	<!-- header -->
 	<!-- sidebar left-->
-        @include('backend.master.sidebar')
+	@include('backend.master.sidebar')
 	<!--/. end sidebar left-->
 
 	<!--main-->
-        @yield('content')
+    @yield('content')
 	<!--end main-->
 
-	<!-- javascript -->
-
-
-</body>
+    <!-- javascript -->
 
 @section('script')
     <script src="js/jquery-1.11.1.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/chart.min.js"></script>
-    <script src="js/chart-data.js"></script>
-
+	<script src="js/chart-data.js"></script>
 @show
+
+
+</body>
 
 </html>

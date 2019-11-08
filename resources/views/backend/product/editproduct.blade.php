@@ -1,5 +1,5 @@
 @extends('backend.master.master')
-@section('title','Sửa sản phẩm')
+@section('title','Sửa Sản Phẩm')
 @section('content')
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
     <div class="row">
@@ -86,6 +86,7 @@
 
     <!--/.row-->
 </div>
+@endsection
 @section('script')
     @parent
     <script>
@@ -106,7 +107,7 @@
                    $('#img').click();
                });
            });
+
        </script>
-@endsection
 
 @endsection
