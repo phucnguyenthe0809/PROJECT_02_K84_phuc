@@ -24,7 +24,14 @@ class AddCategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name'=>'required',
+
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'name.required'=>'Tên danh mục không được để trống',
         ];
     }
 }

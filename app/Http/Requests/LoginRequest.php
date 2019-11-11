@@ -33,9 +33,9 @@ class LoginRequest extends FormRequest
         return [
             'email.required'=>'Email không được để trống',
             'email.email'=>'Email không đúng định dạng',
-            'email.min'=>'Email không được nhỏ hơn 5 ký tự',
-            'password.required'=>'Password không được để trống',
-            'password.min'=>'Password không được nhỏ hơn 5 ký tự'
+            'email.min'=>'Email không được ít hơn 5 ký tự',
+            'password.required'=>'password không được để trống',
+            'password.min'=>'password không được ít hơn 5 ký tự'
         ];
     }
 }
