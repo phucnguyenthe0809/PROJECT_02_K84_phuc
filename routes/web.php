@@ -86,4 +86,80 @@ Route::group(['prefix' => 'admin'], function () {
 
 
 
+//LÝ THUYẾT ---------------------------
+
+
+//SCHEMA
+
+Route::group(['prefix' => 'schema'], function () {
+
+    //tạo bảng
+    Route::get('create', function () {
+        Schema::create('users', function ($table) {
+            $table->bigIncrements('id');      //khóa chính , tự tăng , bigInt , unsigned
+            $table->string('full');           // varchar
+            $table->string('address',50);     //varchar , 50 ký tự
+            $table->timestamps();             //thời gian updated_at và created_at
+        });
+
+        Schema::create('post', function ($table) {
+            $table->bigIncrements('id');
+            $table->string('name',100);
+            $table->bigInteger('users_id')->unsigned();
+            $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade');
+            $table->timestamps();
+        });
+    });
+
+
+
+    //sửa bảng
+
+    Route::get('edit', function () {
+        //sửa tên bảng
+        // Schema::rename('users', 'nguoi-dung');          //sửa tên bảng từ users thành nguoi-dung
+
+        //xóa cột trong bảng
+        Schema::table('nguoi-dung', function ($table) {
+            $table->dropColumn('address');
+
+        });
+
+
+
+    });
+
+    //xóa bảng
+
+    Route::get('del', function () {
+
+        Schema::dropIfExists('users');
+        Schema::dropIfExists('post');
+    });
+
+
+
+    //thay đổi thuộc tính của cột
+    // phải dùng thư viện doctrine
+
+    Route::get('edit-col', function () {
+
+        Schema::table('users', function ($table) {
+            //thay đổi giá trị của cột
+            // $table->string('full', 100)->nullable()->change();
+
+            //thêm cột
+            // $table->boolean('level')->nullable()->default(1);
+
+            //xóa cột
+            // $table->dropColumn('level');
+
+
+            // thêm cột vào sau cột nào đó
+            $table->boolean('level')->nullable()->default(1)->after('address');
+        });
+    });
+
+    });
+
 
