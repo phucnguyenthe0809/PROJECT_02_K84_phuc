@@ -163,3 +163,105 @@ Route::group(['prefix' => 'schema'], function () {
     });
 
 
+
+//QUERY BUILDER
+
+
+Route::group(['prefix' => 'query'], function () {
+    //thêm dữ liệu cho bảng
+    Route::get('insert', function () {
+
+        // //thêm 1 bản ghi
+        DB::table('users')->insert([
+            'email'=>'A@gmail.com',
+            'password'=>'123456',
+            'full'=>'nguyen van A',
+            'address'=>'ha noi',
+            'phone'=>'123456789',
+            'level'=>'1'
+        ]);
+        //thêm nhiều bản ghi
+        DB::table('users')->insert([
+            ['email'=>'B@gmail.com','password'=>'123456','full'=>'nguyen van B','address'=>'ha noi','phone'=>'123456780','level'=>'1'],
+            ['email'=>'C@gmail.com','password'=>'123456','full'=>'nguyen van C','address'=>'ha noi','phone'=>'123456781','level'=>'1'],
+            ['email'=>'D@gmail.com','password'=>'123456','full'=>'nguyen van D','address'=>'ha noi','phone'=>'123456782','level'=>'1']
+        ]);
+    });
+
+    //sửa dữ liệu
+    Route::get('update', function () {
+        DB::table('users')->where('id',1)->update(['address'=>'bac giang']);
+    });
+
+    //xoá dữ liệu
+    Route::get('del', function () {
+        //xóa 1 bản ghi
+        // DB::table('users')->where('id',1)->delete();
+        //xóa tất cả bản ghi
+        DB::table('users')->delete();
+    });
+
+
+//nâng cao query tương tác với dữ liệu
+    //lấy bản ghi
+    Route::get('get', function () {
+    //lấy tấy cả bản ghi
+        // $user=DB::table('users')->get();
+        // dd($user->all());
+
+    //lấy 1 bản ghi đầu tiên
+        // $user=DB::table('users')->first();
+        // dd($user);
+
+
+    //lấy bản ghi theo điều kiện
+        //tìm theo id
+        // $user=DB::table('users')->find(6);
+        // dd($user);
+
+        //tìm theo điều kiện
+            //where()
+        // $user=DB::table('users')->where('address','ha noi')->first();
+        // $user=DB::table('users')->where('id','>','6')->get();
+        // dd($user);
+
+            //where-and
+        // $user=DB::table('users')->where('id','>','5')->where('level',0)->get();
+        // dd($user);
+
+            //where-or
+        // $user=DB::table('users')->where('id','<','6')->orwhere('id','>','7')->get();
+        // dd($user);
+
+            //wherebetween
+        // $user=DB::table('users')->whereBetween('id',[6,8])->get();
+        // dd($user);
+
+
+        //lấy một số bản ghi nhất định
+        // $user=DB::table('users')->take(2)->get();
+        // dd($user);
+
+        //skip
+        // $user=DB::table('users')->skip(2)->take(2)->get();
+        // dd($user);
+
+        //sắp xếp orderBy
+        $user=DB::table('users')->orderBy('id','desc')->take(2)->get();
+        dd($user->all());
+
+
+    });
+
+
+
+
+
+
+
+
+});
+
+
+
+
