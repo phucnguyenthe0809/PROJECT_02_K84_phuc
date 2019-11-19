@@ -8,4 +8,15 @@ function showErrors($errors,$name){
     }
 }
 
+function getCate($cate,$parent,$tab){
+
+	foreach($cate as $value){
+		if($value['parent']==$parent){
+			echo '<option value="'.$value['id'].'">'.$tab.$value['name'].'</option>';
+		    getCate($cate,$value['id'],$tab.'--|');
+		}
+	}
+}
+
+
 

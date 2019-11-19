@@ -29,13 +29,9 @@
 
                             <div class="form-group">
                                 <label for="">Danh mục cha:</label>
-                                <select class="form-control" name="" id="">
-                                    <option>----ROOT----</option>
-                                    <option>Nam</option>
-                                    <option>---|Áo khoác nam</option>
-                                    <option>---|---|Áo khoác nam</option>
-                                    <option>Nữ</option>
-                                    <option>---|Áo khoác nữ</option>
+                                <select class="form-control" name="category" id="">
+                                    <option value="0">----ROOT----</option>
+                                        {{getCate($categories,0,"")}}
                                 </select>
                             </div>
                             <div class="form-group">
@@ -48,11 +44,12 @@
                             <button type="submit" class="btn btn-primary">Thêm danh mục</button>
                         </div>
                         <div class="col-md-7">
-                            <div class="alert bg-success" role="alert">
-                                <svg class="glyph stroked checkmark">
-                                    <use xlink:href="#stroked-checkmark"></use>
-                                </svg> Đã thêm danh mục thành công! <a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+                            @if (session('thongbao'))
+                            <div class="alert alert-success" role="alert">
+                                    <strong>{{session('thongbao')}}</strong>
                             </div>
+                            @endif
+
                             <h3 style="margin: 0;"><strong>Phân cấp Menu</strong></h3>
                             <div class="vertical-menu">
                                 <div class="item-menu active">Danh mục </div>
