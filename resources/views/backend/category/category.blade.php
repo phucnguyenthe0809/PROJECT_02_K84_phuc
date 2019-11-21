@@ -29,9 +29,9 @@
 
                             <div class="form-group">
                                 <label for="">Danh mục cha:</label>
-                                <select class="form-control" name="category" id="">
+                                <select class="form-control" name="parent" id="">
                                     <option value="0">----ROOT----</option>
-                                        {{getCate($categories,0,"")}}
+                                        {{getCate($categories,0,"",0)}}
                                 </select>
                             </div>
                             <div class="form-group">
@@ -53,41 +53,8 @@
                             <h3 style="margin: 0;"><strong>Phân cấp Menu</strong></h3>
                             <div class="vertical-menu">
                                 <div class="item-menu active">Danh mục </div>
-                                <div class="item-menu"><span>Nam</span>
-                                    <div class="category-fix">
-                                        <a class="btn-category btn-primary" href="editcategory.html"><i class="fa fa-edit"></i></a>
-                                        <a class="btn-category btn-danger" href="#"><i class="fas fa-times"></i></i></a>
+                                {{showCate($categories,0,"")}}
 
-                                    </div>
-                                </div>
-                                <div class="item-menu"><span>---|Áo khoác Nam</span>
-                                    <div class="category-fix">
-                                        <a class="btn-category btn-primary" href="editcategory.html"><i class="fa fa-edit"></i></a>
-                                        <a class="btn-category btn-danger" href="#"><i class="fas fa-times"></i></i></a>
-
-                                    </div>
-                                </div>
-                                <div class="item-menu"><span>---|---|Áo khoác Nam (Dành cho việc mở rộng)</span>
-                                    <div class="category-fix">
-                                        <a class="btn-category btn-primary" href="editcategory.html"><i class="fa fa-edit"></i></a>
-                                        <a class="btn-category btn-danger" href="#"><i class="fas fa-times"></i></i></a>
-
-                                    </div>
-                                </div>
-                                <div class="item-menu"><span>Nữ</span>
-                                    <div class="category-fix">
-                                        <a class="btn-category btn-primary" href="editcategory.html"><i class="fa fa-edit"></i></a>
-                                        <a class="btn-category btn-danger" href="#"><i class="fas fa-times"></i></i></a>
-
-                                    </div>
-                                </div>
-                                <div class="item-menu"><span>---|Áo khoác Nữ</span>
-                                    <div class="category-fix">
-                                        <a class="btn-category btn-primary" href="editcategory.html"><i class="fa fa-edit"></i></a>
-                                        <a class="btn-category btn-danger" href="#"><i class="fas fa-times"></i></i></a>
-
-                                    </div>
-                                </div>
 
                             </div>
                         </div>
@@ -102,4 +69,31 @@
     </div>
     <!--/.row-->
 </div>
+@endsection
+@section('script')
+    @parent
+
+	<script>
+		$('#calendar').datepicker({});
+
+		! function ($) {
+			$(document).on("click", "ul.nav li.parent > a > span.icon", function () {
+				$(this).find('em:first').toggleClass("glyphicon-minus");
+			});
+			$(".sidebar span.icon").find('em:first').addClass("glyphicon-plus");
+		}(window.jQuery);
+
+		$(window).on('resize', function () {
+			if ($(window).width() > 768) $('#sidebar-collapse').collapse('show')
+		})
+		$(window).on('resize', function () {
+			if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
+		})
+    </script>
+
+    <script>
+        function del(){
+            return confirm('Bạn muốn xóa danh mục này ?');
+        }
+    </script>
 @endsection

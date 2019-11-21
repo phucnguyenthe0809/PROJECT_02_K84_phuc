@@ -4,6 +4,7 @@ namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AddCategoryRequest;
+use App\Http\Requests\EditCategoryRequest;
 use Illuminate\Http\Request;
 use App\models\Category;
 use Illuminate\Support\Str;
@@ -19,14 +20,30 @@ class CategoryController extends Controller
         $cate=new Category;
         $cate->name=$r->name;
         $cate->slug=Str::slug($r->name, '-');
-        $cate->parent=$r->category;
+        $cate->parent=$r->parent;
         $cate->save();
         return redirect()->back()->with('thongbao','Đã thêm thành công');
 
 
     }
 
-    function getEditCategory() {
-        return view('backend.category.editcategory');
+    function getEditCategory($idCate) {
+        $data['categories']=Category::all();
+        $data['cate']=Category::find($idCate);
+        return view('backend.category.editcategory',$data);
+    }
+
+    function postEditCategory($idCate,EditCategoryRequest $r){
+        $cate=Category::find($idCate);
+        $cate->name=$r->name;
+        $cate->slug=Str::slug($r->name, '-');
+        $cate->parent=$r->parent;
+        $cate->save();
+        return redirect()->back()->with('thongbao','Đã sửa thành công');
+    }
+
+    function DelCategory($idCate){
+        Category::find($idCate)->delete();
+        return redirect()->back()->with('thongbao','Đã xóa thành công');
     }
 }
