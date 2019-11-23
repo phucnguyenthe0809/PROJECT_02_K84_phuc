@@ -43,7 +43,9 @@ class CategoryController extends Controller
     }
 
     function DelCategory($idCate){
-        Category::find($idCate)->delete();
+        $cate=Category::find($idCate);
+        Category::where('parent',$idCate)->update(["parent",$cate->parent]);
+        $cate->delete();
         return redirect()->back()->with('thongbao','Đã xóa thành công');
     }
 }

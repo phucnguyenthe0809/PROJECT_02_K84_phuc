@@ -12,6 +12,12 @@ class User extends Authenticatable
 
     public $timestamps=false;
 
+    //kết nối 1-1 theo chiều xuôi đén info
+    public function info()
+    {
+        return $this->hasOne('App\models\info', 'user_id', 'id');
+    }
+
     /**
      * The attributes that are mass assignable.
      *
