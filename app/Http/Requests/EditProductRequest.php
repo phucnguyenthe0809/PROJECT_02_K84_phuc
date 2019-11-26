@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AddProductRequest extends FormRequest
+class EditProductRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,7 @@ class AddProductRequest extends FormRequest
     public function rules()
     {
         return [
-            'code'=>'required|min:3|unique:product,code',
+            'code'=>'required|min:3|unique:product,code,'.$this->idPrd,
             'name'=>'required|min:3',
             'price'=>'required|numeric',
             'img'=>'image', // file phải là định dạng ảnh
