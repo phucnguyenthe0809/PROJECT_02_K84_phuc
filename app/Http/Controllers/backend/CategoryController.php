@@ -46,6 +46,6 @@ class CategoryController extends Controller
         $cate=Category::find($idCate);
         Category::where('parent',$idCate)->update(["parent",$cate->parent]);
         $cate->delete();
-        return redirect()->back()->with('thongbao','Đã xóa thành công');
+        return redirect('/admin/category')->with('thongbao','Đã xóa thành công');
     }
 }
