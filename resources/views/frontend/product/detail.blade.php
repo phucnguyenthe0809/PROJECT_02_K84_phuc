@@ -17,7 +17,8 @@
                                 </div>
                             </div>
                             <div class="col-md-7">
-                                <form action="product/AddCart" method="post">
+                                <form action="/cart/add" method="get">
+
 
                                     <div class="desc">
                                         <h3>{{$prd->name}} {{$prd->code}}</h3>
@@ -52,7 +53,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <input type="hidden" name="id_product" value="1">
+                                    <input type="hidden" name="id_product" value="{{$prd->id}}">
                                         <p><button class="btn btn-primary btn-addtocart" type="submit"> Thêm vào giỏ
                                                 hàng</button></p>
                                     </div>
