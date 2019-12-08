@@ -21,17 +21,18 @@
                     </div>
                 </div>
             </div>
+            <form method="post">
             <div class="row">
-                <div class="col-md-7">
-                    <form method="post" class="colorlib-form">
+                <div class="col-md-7 colorlib-form">
+
                         @csrf
                         <h2>Chi tiết thanh toán</h2>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="fname">Họ & Tên</label>
-                                    <input type="text" id="fname" name="name" class="form-control" placeholder="First Name">
-                                    {{showErrors($errors,'name')}}
+                                    <input type="text" id="fname" name="full" class="form-control" placeholder="First Name">
+                                    {{showErrors($errors,'full')}}
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -54,7 +55,7 @@
                                     <label for="Phone">Số điện thoại</label>
                                     <input type="text" id="zippostalcode" class="form-control"
                                         placeholder="Ex: 0123456789" name="phone">
-                                        {{showErrors($errors,'name')}}
+                                        {{showErrors($errors,'phone')}}
                                 </div>
                             </div>
                             <div class="form-group">
@@ -63,7 +64,7 @@
                                 </div>
                             </div>
                         </div>
-                    </form>
+
                 </div>
                 <div class="col-md-5">
                     <div class="cart-detail">
@@ -72,22 +73,24 @@
                             <li>
 
                                 <ul>
-                                    <li><span>1 x Tên sản phẩm</span> <span>₫ 990.000</span></li>
-                                    <li><span>1 x Tên sản phẩm</span> <span>₫ 780.000</span></li>
+                                    @foreach ($product as $row)
+                                        <li><span>{{$row->qty}} x {{$row->name}}</span> <span>₫ {{number_format($row->price,0,"",".")}}</span></li>
+                                    @endforeach
                                 </ul>
                             </li>
 
-                            <li><span>Tổng tiền đơn hàng</span> <span>₫ 1.370.000</span></li>
+                            <li><span>Tổng tiền đơn hàng</span> <span>₫ {{$total}}</span></li>
                         </ul>
                     </div>
 
                     <div class="row">
                         <div class="col-md-12">
-                            <p><a href="order-complete.html" class="btn btn-primary">Thanh toán</a></p>
+                            <p><button type="submit" class="btn btn-primary">Thanh toán</button></p>
                         </div>
                     </div>
                 </div>
             </div>
+        </form>
         </div>
     </div>
 @endsection
